@@ -17,7 +17,7 @@ const Navbar = () => {
         }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img
-                    src="./media/event-carts-logo.png"
+                    src="../media/event-carts-logo.png"
                     alt="Logo"
                     style={{ height: 40 }}
                 />
