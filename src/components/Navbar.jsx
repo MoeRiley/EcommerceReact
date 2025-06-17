@@ -1,39 +1,47 @@
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import CartWidget from "./CartWidget"
+import { useState, useEffect } from "react"
+import { NavLink } from 'react-router'
 
-const Navbar = () => {
+
+function NavBar () {
+    const [categories, setCategories] = useState ([])
+
+    useEffect (() => {
+        fetch('https://dummyjson.com/products/categories')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setCategories(data)})
+    }, [])
+
     return (
-        <nav style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 10px',
-            backgroundColor: 'rgba(255, 255, 255, 0.89)',
-            borderBottom: '1px solid black',
-            zIndex: 1
-        }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <img
-                    src="../media/event-carts-logo.png"
-                    alt="Logo"
-                    style={{ height: 40 }}
-                />
-                <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'black' }}>
-                    Event Carts
-                </div>
-                <div style={{ fontSize: '16px', color: 'black' }}>
-                    Carts
-                </div>
-                <div style={{ fontSize: '16px', color: 'black' }}>
-                    Barras
-                </div>
-            </div>
-            <CartWidget/>
-        </nav>
+        <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
+            <Container>
+                <Navbar.Brand href="/">Tienda entrega 2</Navbar.Brand>
+                <Navbar.Toggle aria-controls ="basic-navbar-nav"></Navbar.Toggle>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <NavDropdown title="categorias" id="basic-nav-dropdown">
+                            {categories.map(cat => (
+                                <NavDropdown.Item
+                                key={cat.slug} 
+                                   to={`/category/${cat.slug}`} 
+                                   as={NavLink}
+                                >
+                                   {cat.name}
+                                </NavDropdown.Item>
+                            ))}
+                        </NavDropdown>
+                    </Nav>
+                    <CartWidget />
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
 
-export default Navbar
+export default NavBar
