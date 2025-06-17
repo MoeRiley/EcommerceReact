@@ -15,17 +15,18 @@ function NavBar () {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                setCategories(data)})
+                setCategories(data)
+            })
     }, [])
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
+        <Navbar expand="lg" bg="dark" variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand href="/">Tienda entrega 2</Navbar.Brand>
-                <Navbar.Toggle aria-controls ="basic-navbar-nav"></Navbar.Toggle>
+                <Navbar.Brand href="/">🛍️ D-todo</Navbar.Brand>
+                <Navbar.Toggle aria-controls ="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="categorias" id="basic-nav-dropdown">
+                        <NavDropdown title="categorias" id="basic-nav-dropdown" menuVariant="dark">
                             {categories.map(cat => (
                                 <NavDropdown.Item
                                 key={cat.slug} 
@@ -37,7 +38,9 @@ function NavBar () {
                             ))}
                         </NavDropdown>
                     </Nav>
-                    <CartWidget />
+                    <Nav className="ms-auto">
+                        <CartWidget />
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
