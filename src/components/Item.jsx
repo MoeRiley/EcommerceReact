@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 function Item ({ item }) {
     const navigate = useNavigate()
