@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 import { NavLink } from 'react-router-dom'
 
 
-function NavBar () {
+function Navbar1 () {
     const [categories, setCategories] = useState ([])
 
     useEffect (() => {
@@ -46,4 +46,4 @@ function NavBar () {
     )
 }
 
-export default NavBar
+export default Navbar1
