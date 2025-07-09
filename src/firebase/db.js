@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore"
+import { getFirestore, collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore"
 import { app } from './config'
 
 const db= getFirestore(app)
@@ -37,4 +37,8 @@ export const getCategories = async () => {
     })
 
     return Array.from(categoriasSet)
+}
+
+export const createOrder = async (orden) => {
+    await addDoc(collection(db, "orders"), orden)
 }

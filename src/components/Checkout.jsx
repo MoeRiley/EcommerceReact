@@ -2,6 +2,8 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useContext } from "react"
 import { CartContext } from '../context/CartContext'
+import { createOrder } from '../firebase/db'
+import { serverTimestamp } from 'firebase/firestore'
 
 function Checkout () {
     const { cart } = useContext(CartContext)
@@ -14,6 +16,13 @@ function Checkout () {
         const nombre = form.nombre.value
         const telefono = form.telefono.value
 
+        createOrder({
+            email,
+            nombre,
+            telefono,
+            products: cart,
+            time: serverTimestamp()
+        })
     }
 
     return (
