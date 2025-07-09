@@ -5,17 +5,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import CartWidget from "./CartWidget"
 import { useState, useEffect } from "react"
 import { NavLink } from 'react-router-dom'
+import { getCategories } from '../firebase/db'
 
 
 function NavBar () {
     const [categories, setCategories] = useState ([])
 
-    useEffect (() => {
-        fetch('https://dummyjson.com/products/categories')
-            .then(res => res.json())
-            .then(data => {
-                setCategories(data)
-            })
+    useEffect(() => {
+        getCategories().then(cats => setCategories(cats))
     }, [])
 
     return (
@@ -28,11 +25,11 @@ function NavBar () {
                         <NavDropdown title="categorias" id="basic-nav-dropdown" menuVariant="dark">
                             {categories.map(cat => (
                                 <NavDropdown.Item
-                                    key={cat.slug}
-                                    as={NavLink} 
-                                    to={`/category/${cat.slug}`} 
+                                    key={cat}
+                                    as={NavLink}
+                                    to={`/category/${cat}`}
                                 >
-                                    {cat.name}
+                                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
                                 </NavDropdown.Item>
                             ))}
                         </NavDropdown>

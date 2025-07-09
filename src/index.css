@@ -7,6 +7,10 @@ body {
   font-family: system-ui, sans-serif;
 }
 
+body {
+  padding-top: 70px; /* Altura aproximada del NavBar */
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -24,3 +24,17 @@ export const getProduct = async (id) => {
         return null
     }
 }
+
+export const getCategories = async () => {
+    const documentos = await getDocs(collection(db, "productos"))
+    const categoriasSet = new Set()
+
+    documentos.forEach(doc => {
+        const data = doc.data()
+        if (data.category) {
+            categoriasSet.add(data.category)
+        }
+    })
+
+    return Array.from(categoriasSet)
+}

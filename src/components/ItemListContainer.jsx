@@ -10,7 +10,12 @@ function ItemListContainer ( ) {
     useEffect(() => {
         getProducts()
             .then(products => {
-                setItems(products)
+                if (categoryName) {
+                    const filtrados = products.filter(prod => prod.category === categoryName)
+                    setItems(filtrados)
+                } else {
+                    setItems(products)
+                }
             }) 
     }, [categoryName])
 

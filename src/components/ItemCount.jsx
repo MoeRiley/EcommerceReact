@@ -8,7 +8,11 @@ function ItemCount ({ item }) {
     const { agregarAlCarrito} = useContext(CartContext)
 
     const handleSumar = () => setCount(count + 1)
-    const handleRestar = () => setCount(count - 1)
+    const handleRestar = () => {
+        if (count > 1) {
+            setCount(count - 1)
+        }
+    }
     const handleAgregar = () => agregarAlCarrito({...item, count})
 
     return (
