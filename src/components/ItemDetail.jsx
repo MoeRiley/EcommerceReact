@@ -16,7 +16,7 @@ function ItemDetail ({ detail }) {
                             <Card.Title>{detail.title}</Card.Title>
                             <Card.Text>{detail.description}</Card.Text>
                             <Card.Text className="fw-bold fs-4">${detail.price}</Card.Text>
-                            <ItemCount />
+                            <ItemCount item={detail} />
                             <Button variant="primary" className="mt-3">Agregar al carrito</Button>
                         </Card.Body>
                     </Card>
