@@ -16,24 +16,30 @@ function ItemCount ({ item }) {
     }
     const handleAgregar = () => {
         agregarAlCarrito({...item, count})
-
         Swal.fire({
             icon: 'success',
-            title: 'Producto agregado',
-            text: `${item.title} x${count} fue añadido al carrito.`,
+            title: 'Agregado al carrito',
+            text: `${item.title} x${count} fue agregado.`,
             timer: 1500,
             showConfirmButton: false
         })
     }
 
     return (
-        <div className="d-flex align-items-center justify-content-center mt-3">
+        <div className="d-flex flex-column align-items-center justify-content-center mt-3">
             <ButtonGroup>
                 <Button variant="outline-light" onClick={handleRestar}>-</Button>
                 <Button variant="dark" disabled>{count}</Button>
                 <Button variant="outline-light" onClick={handleSumar}>+</Button>
-                <Button variant="primary" className="mt-3" onClick={handleAgregar}>Agregar al carrito</Button>
             </ButtonGroup>
+
+            <Button
+                variant="primary"
+                className="mt-3"
+                onClick={handleAgregar}
+            >
+                Agregar al carrito
+            </Button>
         </div>
     )
 }

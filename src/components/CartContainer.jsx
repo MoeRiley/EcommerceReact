@@ -11,12 +11,19 @@ function CartContainer () {
 
     if (cart.length === 0) {
         return (
-            <div className="text-center mt-5 text-light">
-                <h2>Tu carrito está vacío 🛒</h2>
-                <Button variant="light" onClick={() => navigate('/')}>
-                    Volver al inicio
-                </Button>
-            </div>
+            <Container className="mt-5">
+                <Row className="justify-content-center">
+                    <Col md={8}>
+                        <Card bg="dark" text="light" className="p-5 text-center">
+                            <h2>Tu carrito está vacío 🛒</h2>
+                            <p className="text-secondary">Agrega productos para continuar con tu compra.</p>
+                            <Button variant="light" onClick={() => navigate('/')}>
+                                Volver al inicio
+                            </Button>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 
@@ -25,19 +32,20 @@ function CartContainer () {
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Card bg="dark" text="light" className="p-4">
-                        <h3 className="mb-4">Carrito de compras</h3>
+                        <h3 className="mb-4">🛍️ Carrito de compras</h3>
 
                         <ListGroup variant="flush">
                             {cart.map(prod => (
                                 <ListGroup.Item
                                     key={prod.id}
-                                    className="d-flex justify-content-between align-items-center bg-dark text-light border-light"
+                                    className="d-flex justify-content-between align-items-center bg-dark text-light border-bottom"
                                 >
                                     <div>
                                         <strong>{prod.title}</strong> x {prod.count}
                                     </div>
                                     <Button
                                         variant="outline-danger"
+                                        size="sm"
                                         onClick={() => {
                                             eliminarDelCarrito(prod.id)
                                             Swal.fire({
@@ -55,15 +63,17 @@ function CartContainer () {
                             ))}
                         </ListGroup>
 
-                        <div className="mt-4 d-flex justify-content-between align-items-center">
-                            <h4>Total: ${total}</h4>
-                            <div>
-                                <Button variant="success" onClick={() => navigate('/checkout')}>
+                        <div className="mt-4 d-flex justify-content-between align-items-center flex-wrap">
+                            <h4 className="mb-3 mb-md-0">Total: ${total}</h4>
+                            <div className="d-flex gap-2">
+                                <Button
+                                    variant="success"
+                                    onClick={() => navigate('/checkout')}
+                                >
                                     Ir al checkout
                                 </Button>
                                 <Button
                                     variant="outline-danger"
-                                    className="ms-3"
                                     onClick={() => {
                                         Swal.fire({
                                             title: '¿Estás seguro?',

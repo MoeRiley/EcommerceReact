@@ -1,13 +1,10 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import { useState, useEffect, useContext } from "react"
 import { CartContext } from '../context/CartContext'
 import { createOrder } from '../firebase/db'
 import { serverTimestamp } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
+import { Container, Card, Button, Form } from 'react-bootstrap'
 
 function Checkout () {
     const { cart, setCart } = useContext(CartContext)
