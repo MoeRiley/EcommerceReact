@@ -1,12 +1,31 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { CartContext } from '../context/CartContext'
 import { createOrder } from '../firebase/db'
 import { serverTimestamp } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 
 function Checkout () {
-    const { cart } = useContext(CartContext)
+    const { cart, setCart } = useContext(CartContext)
+    const navigate = useNavigate()
+    const [ordenExitosa, setOrdenExitosa] = useState(false)
+
+    useEffect(() => {
+        if (!ordenExitosa && cart.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Carrito vacío',
+                text: 'No puedes acceder al checkout sin productos en el carrito.',
+                confirmButtonText: 'Volver a la tienda'
+            }).then(() => {
+                navigate('/')
+            })
+        }
+    }, [cart.length, navigate, ordenExitosa])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -22,29 +41,74 @@ function Checkout () {
             telefono,
             products: cart,
             time: serverTimestamp()
+        }).then(() => {
+            setOrdenExitosa(true)
+            Swal.fire({
+                icon: 'success',
+                title: 'Compra realizada',
+                text: '¡Gracias por tu compra!',
+                confirmButtonText: 'Volver al inicio'
+            }).then(() => {
+                setCart([])
+                navigate('/')
+            })
         })
     }
 
+    if (cart.length === 0 && !ordenExitosa) {
+        return null
+    }
+
     return (
-        <div className='d-flex justify-content-center mt-5'>
-            <Form className='w-50' onSubmit={handleSubmit}>
-                <Form.Group className="mb-30" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="correo@ejemplo.cl" required/>
-                </Form.Group>
-                <Form.Group className="mb-30" controlId="nombre">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="text" placeholder="usuario ejemplo" required/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="telefono">
-                    <Form.Label>Teléfono</Form.Label>
-                    <Form.Control type="text" placeholder="+56987548965" required/>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </div>
+        <Container className="d-flex justify-content-center mt-5">
+            <Card bg="dark" text="light" className="p-4 w-75">
+                <h3 className="mb-4">Checkout</h3>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="correo@ejemplo.cl"
+                            required
+                            className="bg-dark text-light border-light"
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="nombre">
+                        <Form.Label>Nombre</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Usuario Ejemplo"
+                            required
+                            className="bg-dark text-light border-light"
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-4" controlId="telefono">
+                        <Form.Label>Teléfono</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="+56912345678"
+                            required
+                            className="bg-dark text-light border-light"
+                        />
+                    </Form.Group>
+
+                    <div className="d-flex justify-content-start gap-3">
+                        <Button variant="primary" type="submit">
+                            Finalizar compra
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                navigate('/cart')
+                            }}
+                        >
+                            Volver al carrito
+                        </Button>
+                    </div>
+                </Form>
+            </Card>
+        </Container>
     )
 }
 

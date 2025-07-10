@@ -18,7 +18,7 @@ function NavBar () {
     return (
         <Navbar expand="lg" bg="dark" variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand href="/">🛍️ D-todo</Navbar.Brand>
+                <Navbar.Brand as={NavLink} to="/">🛍️ D-todo</Navbar.Brand>
                 <Navbar.Toggle aria-controls ="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

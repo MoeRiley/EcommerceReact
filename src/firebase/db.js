@@ -40,5 +40,5 @@ export const getCategories = async () => {
 }
 
 export const createOrder = async (orden) => {
-    await addDoc(collection(db, "orders"), orden)
+    return await addDoc(collection(db, "orders"), orden)
 }

@@ -11,7 +11,7 @@ function CartProvider ({ children }) {
             const productoRepetido = cart.find(item => item.id === prod.id)
             const cartSinElProductoRepetido = cart.filter(item => item.id !== prod.id)
             
-            setCart([...cartSinElProductoRepetido, {...productoRepetido, count: productoRepetido.count + 1}])
+            setCart([...cartSinElProductoRepetido, {...productoRepetido, count: productoRepetido.count + prod.count}])
         } else {
             setCart([...cart, prod])
         }
@@ -35,8 +35,10 @@ function CartProvider ({ children }) {
         setCart(nuevoCarrito)
     }
 
+    const vaciarCarrito = () => setCart([])
+
     return (
-        <CartContext.Provider value={{ cart, agregarAlCarrito, getCantidad, getTotal, eliminarDelCarrito }}>
+        <CartContext.Provider value={{ cart, agregarAlCarrito, getCantidad, getTotal, eliminarDelCarrito, setCart, vaciarCarrito }}>
             {children}
         </CartContext.Provider>
     )
