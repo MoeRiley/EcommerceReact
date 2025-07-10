@@ -1,12 +1,156 @@
-# React + Vite
+# 🛒 D-todo - E-commerce con React + Firebase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una tienda online desarrollada con **Vite + React**, que permite explorar productos, filtrarlos por categorías, agregarlos a un carrito de compras, y finalizar una orden a través de un formulario. Utiliza **Firebase** como base de datos y **Bootstrap** para el diseño visual.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades principales
 
-## Expanding the ESLint configuration
+✅ Navegación dinámica con React Router  
+✅ Visualización de productos desde Firebase Firestore  
+✅ Filtrado por categorías  
+✅ Vista detallada de cada producto  
+✅ Agregar productos al carrito con control de cantidad  
+✅ Carrito con:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Total general
+- Eliminación individual o total de productos  
+
+✅ Checkout con formulario de compra  
+✅ Alerta visual con [SweetAlert2](https://sweetalert2.github.io/)  
+✅ Estética responsiva con [Bootstrap 5](https://getbootstrap.com/)  
+✅ Guardado de orden en Firestore
+
+---
+
+## 🧰 Tecnologías y dependencias
+
+### 🧪 Frameworks y librerías principales
+
+- **[React](https://reactjs.org/)**  
+  Framework de JavaScript para construir interfaces de usuario.
+
+- **[Vite](https://vitejs.dev/)**  
+  Herramienta de build ultrarrápida para proyectos React.
+
+- **[React Router DOM](https://reactrouter.com/en/main/start/tutorial)**  
+  Navegación entre rutas en aplicaciones React.  
+  ```bash
+  npm install react-router-dom
+
+
+
+### [Bootstrap 5 (React-Bootstrap)](https://react-bootstrap.github.io/)  
+Framework de estilos para una interfaz responsiva y elegante.
+
+```bash
+npm install react-bootstrap bootstrap
+```
+
+### [Firebase](https://firebase.google.com/docs/firestore?hl=es)  
+Plataforma de backend como servicio utilizada para base de datos y almacenamiento.
+
+```bash
+npm install firebase
+```
+
+### [SweetAlert2](https://sweetalert2.github.io/)  
+Librería para alertas personalizadas y visualmente atractivas.
+
+```bash
+npm install sweetalert2
+```
+
+---
+
+## 🔥 Estructura del proyecto
+
+```
+src/
+├── App.jsx
+├── main.jsx
+├── index.css
+├── context/
+│   ├── CartContext.js
+│   └── CartProvider.jsx
+├── firebase/
+│   ├── config.js
+│   └── db.js
+├── components/
+│   ├── NavBar.jsx
+│   ├── ItemListContainer.jsx
+│   ├── ItemList.jsx
+│   ├── Item.jsx
+│   ├── ItemDetailContainer.jsx
+│   ├── ItemDetail.jsx
+│   ├── ItemCount.jsx
+│   ├── CartWidget.jsx
+│   ├── CartContainer.jsx
+│   └── Checkout.jsx
+```
+
+---
+
+## 🧑‍💻 Cómo ejecutar el proyecto localmente
+
+### 1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tuusuario/tu-repo.git
+cd tu-repo
+```
+
+### 2. Instala las dependencias:
+
+```bash
+npm install
+```
+
+### 3. Ejecuta el proyecto:
+
+```bash
+npm run dev
+```
+
+### 4. Abre en tu navegador:
+
+```
+http://localhost:5173/
+```
+
+---
+
+## 🔐 Configuración de Firebase
+
+Para que el proyecto funcione correctamente:
+
+1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com/)
+2. Habilita **Cloud Firestore**
+3. Crea una colección llamada `productos`
+4. Agrega tu configuración en `firebase/config.js`:
+
+```js
+export const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_STORAGE_BUCKET",
+  messagingSenderId: "TU_MESSAGING_SENDER_ID",
+  appId: "TU_APP_ID",
+  measurementId: "TU_MEASUREMENT_ID"
+}
+```
+
+---
+
+## ✨ Créditos
+
+Este proyecto fue desarrollado por Nico en las clases de React JS impartidas por CODERHOUSE con fines educativos para aprender React, Firebase y diseño de e-commerce moderno usando SPA (Single Page Application).
+
+---
+
+## 📃 Agradecimientos a:
+
+Luis Gonzalez
+
+Arturo Grottoli
